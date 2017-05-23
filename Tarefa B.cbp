@@ -45,6 +45,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Testes.h" />
+		<Unit filename="WSClock.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="WSClock.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -2,63 +2,84 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="Pagina.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+	<File name="WSClock.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="324" topLine="0" />
+			<Cursor1 position="631" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Memoria.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+	<File name="WSClock.c" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3353" topLine="114" />
-		</Cursor>
-	</File>
-	<File name="Moldura.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="97" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="282" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="SegundaChance.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="598" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Testes.c" open="1" top="1" tabpos="5" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3363" topLine="37" />
+			<Cursor1 position="1961" topLine="14" />
 		</Cursor>
 		<Folding>
-			<Collapse line="6" />
-			<Collapse line="42" />
-			<Collapse line="62" />
-			<Collapse line="81" />
+			<Collapse line="4" />
+			<Collapse line="14" />
+			<Collapse line="28" />
 		</Folding>
 	</File>
-	<File name="Testes.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="SegundaChance.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="73" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="SegundaChance.c" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1824" topLine="12" />
+			<Cursor1 position="1821" topLine="6" />
 		</Cursor>
 		<Folding>
 			<Collapse line="4" />
 			<Collapse line="11" />
 			<Collapse line="23" />
-			<Collapse line="84" />
-			<Collapse line="96" />
-			<Collapse line="100" />
 		</Folding>
 	</File>
-	<File name="Memoria.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+	<File name="Testes.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="763" topLine="0" />
+			<Cursor1 position="299" topLine="0" />
 		</Cursor>
+	</File>
+	<File name="Moldura.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="177" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Testes.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6342" topLine="37" />
+		</Cursor>
+		<Folding>
+			<Collapse line="7" />
+			<Collapse line="14" />
+			<Collapse line="30" />
+			<Collapse line="43" />
+			<Collapse line="63" />
+			<Collapse line="82" />
+			<Collapse line="105" />
+		</Folding>
+	</File>
+	<File name="SegundaChance.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="439" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="290" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Memoria.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="75" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Pagina.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="140" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Memoria.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2592" topLine="22" />
+		</Cursor>
+		<Folding>
+			<Collapse line="4" />
+			<Collapse line="23" />
+			<Collapse line="35" />
+			<Collapse line="59" />
+		</Folding>
 	</File>
 </CodeBlocks_layout_file>

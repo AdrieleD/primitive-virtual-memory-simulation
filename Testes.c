@@ -3,6 +3,7 @@
 #include "Memoria.h"
 #include "Pagina.h"
 #include "SegundaChance.h"
+#include "WSClock.h"
 
 void testeCriarMemoria(){
     Memoria m = iniciarMemoria(10);
@@ -137,5 +138,65 @@ void testeExecucaoSegundaChance(){
     printf("\n\n\nMemoria:\n");
     imprime_memoria(m);
     libera_lista_segunda_chance(li);
+    libera_Memoria(m);
+}
+
+void testeCriarListaWSClock(){
+    ListaWSClock ws = cria_lista_WSClock(10);
+    // indice   R   W   classe  idade   ultimaVezUsada
+    Pagina p[] = {{35, 1, 1, 0, 0, 1},
+                  { 7, 1, 1, 0, 0, 1},
+                  {25, 1, 1, 0, 0, 1},
+                  {17, 1, 1, 0, 0, 1}};
+    int i;
+    for(i = 0; i < 4; i++){
+        insere_pagina_final_wsclock(ws, p[i]);
+    }
+    printf("Tamanho da lista: %d\n", ws->tamanho);
+    imprime_lista_wsclock(ws);
+    libera_lista_wsclock(ws);
+}
+
+void testeExecucaoWSClock(){
+    Memoria m = iniciarMemoria(2);
+    ListaWSClock li = cria_lista_WSClock(3);
+    int i, tipoReferencia;
+    // indice   R   W   classe  idade   ultimaVezUsada
+    Pagina p[] = {{35, 0, 0, 0, 0, 1},
+                  {25, 0, 0, 0, 0, 1},
+                  { 7, 0, 0, 0, 0, 1},
+                  {35, 0, 0, 0, 0, 1},
+                  {17, 0, 0, 0, 0, 1}};
+
+    for(i = 0; i < 6; i++){ // execucao
+        p[i].ultimaVezUsada = li->tempo;
+        if(temPagina(m, p[i].indice)){ // se a pagina já está na memoria, atualizar R e/ou W dela
+            /*if(ESCRITA == tipoReferencia){ // foi lido um W
+                atualizar_escrita_pagina_wsclock(li, p[i].indice);
+            }
+            else{ // foi lido um R
+                atualizar_ultima_referencia_pagina_wsclock(li, p[i].indice);
+            }*/
+        }else{ // pagina não está na memoria, substituir pagina ou não (tem moldura vazia)
+            if(temMolduraVazia(m)){ // tem moldura vazia
+                inserirPaginaMemoria1(m, p[i].indice); // insere na memoria
+                insere_pagina_final_wsclock(li, p[i]); // insere na lista de segunda chance
+                printf("Adicionou pagina %d na memoria e na lista wsclock\n", p[i].indice);
+            }else{
+                /* passa qual pagina ira entrar e informa qual saiu */
+                int paginaAsair = substituir_pagina_lista_wsclock(li, p[i]);
+                inserirPaginaMemoria2(m, paginaAsair, p[i].indice); // troca pagina na memoria
+                printf("Removeu pagina %d e adicionou pagina %d na memoria e na lista wsclock\n", paginaAsair, p[i].indice);
+            }
+        }
+        li->tempo += 1;
+        atualizar_idade_paginas_wsclock(li);
+    }
+
+    printf("\n\n\nLista wsclock:\n");
+    imprime_lista_wsclock(li);
+    printf("\n\n\nMemoria:\n");
+    imprime_memoria(m);
+    libera_lista_wsclock(li);
     libera_Memoria(m);
 }
