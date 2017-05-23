@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1495568295 source:/home/jose/Documents/primitive-virtual-memory-simulation/main.c
+1495578373 source:/home/jose/Documents/primitive-virtual-memory-simulation/main.c
 	<stdio.h>
 	<stdlib.h>
 	"Testes.h"
@@ -23,7 +23,7 @@
 	<stdlib.h>
 	"SegundaChance.h"
 
-1495560767 source:/home/jose/Documents/primitive-virtual-memory-simulation/Testes.c
+1495577441 source:/home/jose/Documents/primitive-virtual-memory-simulation/Testes.c
 	<stdio.h>
 	<stdlib.h>
 	"Memoria.h"
@@ -36,7 +36,7 @@
 1495512509 /home/jose/Documents/primitive-virtual-memory-simulation/SegundaChance.h
 	"Pagina.h"
 
-1495561501 source:/home/jose/Documents/primitive-virtual-memory-simulation/WSClock.c
+1495577796 source:/home/jose/Documents/primitive-virtual-memory-simulation/WSClock.c
 	<stdio.h>
 	<stdlib.h>
 	"WSClock.h"
@@ -46,14 +46,15 @@
 
 1495567393 /home/jose/Documents/primitive-virtual-memory-simulation/Gerenciador.h
 
-1495567874 source:/home/jose/Documents/primitive-virtual-memory-simulation/Gerenciador.c
+1495578402 source:/home/jose/Documents/primitive-virtual-memory-simulation/Gerenciador.c
 	<stdio.h>
 	<stdlib.h>
 	"Gerenciador.h"
 	"Memoria.h"
 	"SegundaChance.h"
+	"WSClock.h"
 
-1495568222 source:/home/jose/Documents/primitive-virtual-memory-simulation/GeradorArquivosTeste.c
+1495568445 source:/home/jose/Documents/primitive-virtual-memory-simulation/GeradorArquivosTeste.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>

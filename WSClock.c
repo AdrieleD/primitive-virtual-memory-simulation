@@ -30,7 +30,6 @@ int insere_pagina_final_wsclock(ListaWSClock li, Pagina p){
     if(li == NULL)
         return 0;
     ElemWSClock *no;
-    int i = 0;
     no = (ElemWSClock*) malloc(sizeof(ElemWSClock));
     if(no == NULL)
         return 0;
@@ -39,16 +38,16 @@ int insere_pagina_final_wsclock(ListaWSClock li, Pagina p){
 
     if(li->primeiro == NULL){ //lista vazia: insere início
         li->primeiro = no;
+        no->prox = li->primeiro;
     }else{
         ElemWSClock *aux;
         aux = li->primeiro;
-        while(i < li->tamanho){
+        while(aux->prox != li->primeiro){
             aux = aux->prox;
-            i++;
         }
         aux->prox = no;
+        no->prox = li->primeiro;
     }
-    no->prox = li->primeiro;
     li->tamanho++;
     return 1;
 }
@@ -65,8 +64,8 @@ int substituir_pagina_lista_wsclock(ListaWSClock li, Pagina p){
         if(no != NULL)
             //printf("pagina %d\n", no->pagina.indice);
         if(no->pagina.R == NAOREFERENCIADA && no->pagina.idade < li->tau){ // Bit R for 0 e idade < tau
-            if(no->pagina.W = NAOESCRITA){
-                printf("aqui\n");
+            if(no->pagina.W == NAOESCRITA){
+                //printf("aqui\n");
                 pagina = no->pagina.indice; // pagina a sair
                 no->pagina = p; // substituir pagina
                 return pagina;
@@ -78,10 +77,12 @@ int substituir_pagina_lista_wsclock(ListaWSClock li, Pagina p){
         if(no->pagina.R == REFERENCIADA){
             no->pagina.R = NAOREFERENCIADA;
         }
-        if(no->pagina.indice == li->primeiro->pagina.indice){
+
+        if(no == li->primeiro){
             li->tempo += 1;
             atualizar_idade_paginas_wsclock(li);
         }
+
         no = no->prox;
     }
     return 0;

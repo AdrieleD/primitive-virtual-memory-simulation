@@ -16,10 +16,11 @@ int main(){
     //testeExecucaoWSClock(); // ERRADO
 
     //lerArquivo();
-    executarSegundaChance();
 
+    //executarSegundaChance();
+    //executarWSClock();
 
-    //gerarArquivoTeste(10, 2, 20);
+    //gerarArquivoTeste(1000, 20, 50);
 
     return 0;
 }

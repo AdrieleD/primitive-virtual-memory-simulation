@@ -17,7 +17,6 @@ int gerarArquivoTeste(int numAcessos, int tamanhoMemoria, int numPaginas){
 	else{
         int comando, pagina;
 
-
         fprintf(arq, "%d %d\n", tamanhoMemoria, numPaginas);
 
         for(i = 0; i < numAcessos; i++){
