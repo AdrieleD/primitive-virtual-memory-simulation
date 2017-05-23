@@ -22,8 +22,8 @@ int insere_moldura_final(Memoria li, Moldura m);
 int remove_moldura(Memoria li, int indiceMoldura); /// não será usada
 void imprime_memoria(Memoria li);
 int temPagina(Memoria li, int pagina);
-void inserirPagina1(Memoria li, int pagina);/* Presume-se que a memoria tem moldura vazia, então será inserido na primeira encontrada*/
-void inserirPagina2(Memoria li, int moldura, int pagina); /* Insere uma pagina em determinada moldura, substituindo a pagina presente*/
+void inserirPaginaMemoria1(Memoria li, int pagina);/* Presume-se que a memoria tem moldura vazia, então será inserido na primeira encontrada*/
+void inserirPaginaMemoria2(Memoria li, int paginaASerSubstituida, int pagina); /* Insere uma pagina em determinada moldura, substituindo a pagina presente*/
 int temMolduraVazia(Memoria li);
 
 #endif // MEMORIA_H_INCLUDED

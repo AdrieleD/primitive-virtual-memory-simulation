@@ -7,6 +7,9 @@ int main(){
     //testeInsercaoPaginas();
     //testePaginaPresente();
     //testeMemoriaVazia();
+    //testeSegundaChance();
+    //testeSegundaChanceRemocao();
+    testeExecucaoSegundaChance();
 
     return 0;
 }

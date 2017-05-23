@@ -104,7 +104,7 @@ int temPagina(Memoria li, int pagina){
 }
 
 /* Presume-se que a memoria tem moldura vazia, então será inserido na primeira encontrada*/
-void inserirPagina1(Memoria li, int pagina){
+void inserirPaginaMemoria1(Memoria li, int pagina){
     if(li == NULL)
         return 0;
     ElemMoldura* no = li->primeiro;
@@ -119,12 +119,12 @@ void inserirPagina1(Memoria li, int pagina){
 }
 
 /* Insere uma pagina em determinada moldura, substituindo a pagina presente*/
-void inserirPagina2(Memoria li, int moldura, int pagina){
+void inserirPaginaMemoria2(Memoria li, int paginaASerSubstituida, int pagina){
     if(li == NULL)
         return 0;
     ElemMoldura* no = li->primeiro;
     while(no != NULL){
-        if(no->mold.indiceMoldura == moldura){
+        if(no->mold.indicePagina == paginaASerSubstituida){
             no->mold.indicePagina = pagina;
             no->mold.vazia = TEMPAGINA; // moldura nao está vazia
             break;
