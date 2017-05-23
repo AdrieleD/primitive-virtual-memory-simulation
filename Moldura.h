@@ -1,8 +1,8 @@
 #ifndef MOLDURA_H_INCLUDED
 #define MOLDURA_H_INCLUDED
 
-#define VAZIA 1
-#define NAOVAZIA 0
+#define TEMPAGINA 0
+#define NAOTEMPAGINA 1
 
 struct moldura{
     int indiceMoldura;

@@ -1,21 +1,29 @@
 #ifndef MEMORIA_H_INCLUDED
 #define MEMORIA_H_INCLUDED
-#include <Moldura.h>
-
-#define TEMPAGINA 1
-#define NAOTEMPAGINA 0
-
+#include "Moldura.h"
 
 struct elemMoldura{
     Moldura mold;
-    struct elemMoldura* prox;
+    struct elemMoldura *prox;
+};
+
+typedef struct elemMoldura ElemMoldura;
+
+struct memoria{
+    struct elemMoldura *primeiro;
     int tamanho;
 };
 
-typedef struct elemMoldura* ListaMoldura;
+typedef struct memoria *Memoria;
 
-ListaMoldura* iniciarMemoria();
-void substituirPagina();
-int temMoldura(int pagina);
+Memoria iniciarMemoria(int tam);
+void libera_Memoria(Memoria li);
+int insere_moldura_final(Memoria li, Moldura m);
+int remove_moldura(Memoria li, int indiceMoldura); /// não será usada
+void imprime_memoria(Memoria li);
+int temPagina(Memoria li, int pagina);
+void inserirPagina1(Memoria li, int pagina);/* Presume-se que a memoria tem moldura vazia, então será inserido na primeira encontrada*/
+void inserirPagina2(Memoria li, int moldura, int pagina); /* Insere uma pagina em determinada moldura, substituindo a pagina presente*/
+int temMolduraVazia(Memoria li);
 
 #endif // MEMORIA_H_INCLUDED

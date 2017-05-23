@@ -2,10 +2,11 @@
 #include <stdlib.h>
 #include "Testes.h"
 
-int main()
-{
-    printf("Hello world!\n");
+int main(){
+    //testeCriarMemoria();
+    //testeInsercaoPaginas();
+    //testePaginaPresente();
+    //testeMemoriaVazia();
+
     return 0;
 }
-
-
