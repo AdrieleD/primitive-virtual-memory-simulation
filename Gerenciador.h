@@ -3,5 +3,6 @@
 
 void lerArquivo();
 void executarSegundaChance();
+int executarWSClock(int tau);
 
 #endif // GERENCIADOR_H_INCLUDED

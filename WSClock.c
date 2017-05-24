@@ -63,22 +63,21 @@ int substituir_pagina_lista_wsclock(ListaWSClock li, Pagina p){
     while(1){ // irá executar até remover alguma pagina
         if(no != NULL)
             //printf("pagina %d\n", no->pagina.indice);
-        if(no->pagina.R == NAOREFERENCIADA && no->pagina.idade < li->tau){ // Bit R for 0 e idade < tau
-            if(no->pagina.W == NAOESCRITA){
-                //printf("aqui\n");
-                pagina = no->pagina.indice; // pagina a sair
-                no->pagina = p; // substituir pagina
-                return pagina;
-            }else{
-                no->pagina.W = NAOESCRITA;
+        if(no->pagina.R == NAOREFERENCIADA){ // Bit R for 0
+            if(no->pagina.idade > li->tau){ // se idade > tau não está no WS
+                if(no->pagina.W == NAOESCRITA){  // nao está suja
+                    pagina = no->pagina.indice; // pagina a sair
+                    no->pagina = p; // substituir pagina
+                    return pagina;
+                }else{
+                    no->pagina.W = NAOESCRITA; // marcada para ser gravada
+                }
             }
+        }else{
+            no->pagina.R = NAOREFERENCIADA; // Passar R para 0 caso esteja com 1
         }
 
-        if(no->pagina.R == REFERENCIADA){
-            no->pagina.R = NAOREFERENCIADA;
-        }
-
-        if(no == li->primeiro){
+        if(no == li->primeiro){  // caso já tenha dado uma volta, envelhecer paginas
             li->tempo += 1;
             atualizar_idade_paginas_wsclock(li);
         }

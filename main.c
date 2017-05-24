@@ -17,10 +17,25 @@ int main(){
 
     //lerArquivo();
 
-    //executarSegundaChance();
-    //executarWSClock();
+    executarSegundaChance();
+    executarWSClock(26);
 
-    //gerarArquivoTeste(1000, 20, 50);
+    /* Buscar melhor tau*/
+    /*int i, j, k, l;
+    j = executarWSClock(1);
+    for(i = 2; i < 100; i++){
+        k = executarWSClock(i);
+        if(k < j){
+            j = k;
+            l = i;
+        }
+    }
 
+    printf("Melhor Reposta: %d\t com i: %d\n", j, l);
+    */
+
+    //gerarArquivoTeste(10000, 20, 50);
+
+    //startProcessManager();
     return 0;
 }

@@ -10,7 +10,7 @@ void lerArquivo(){
     int pagina, W, P;
     FILE *arq = fopen("ArquivoTeste.txt", "r");
     int i = 0;
-
+    char str[2];
     fscanf(arq, "%d %d\n", &W, &P);
     printf("%d %d\n", W, P);
 
@@ -31,7 +31,7 @@ void executarSegundaChance(){
     char comando;
     int pagina, M, P, faltas = 0;
     FILE *arq = fopen("ArquivoTeste.txt", "r");
-    int i = 0;
+    int i = 0, acessos = 0;
 
     fscanf(arq, "%d %d\n", &M, &P);
     Memoria m = iniciarMemoria(M);
@@ -49,22 +49,23 @@ void executarSegundaChance(){
         Pagina p = {pagina, 0, 0, 0, 0, 0};
 
         if(temPagina(m, p.indice)){ // se a pagina já está na memoria, atualizar R dela
-            printf("Pagina %d referenciada\n", p.indice);
+            //printf("Pagina %d referenciada\n", p.indice);
             atualizaRSegundaChance(li, p.indice);
         }else{
             faltas++;
             if(temMolduraVazia(m)){ // tem moldura vazia
                 inserirPaginaMemoria1(m, p.indice); // insere na memoria
                 insere_lista_final_segunda_chance(li, p); // insere na lista de segunda chance
-                printf("Adicionou pagina %d na memoria e na lista\n", p.indice);
+                //printf("Adicionou pagina %d na memoria e na lista\n", p.indice);
             }else{
                 int paginaAsair = remove_lista_segunda_chance(li); // determina qual pagina irá sair
                 insere_lista_final_segunda_chance(li, p); // insere pagina na lista de segunda chance
                 inserirPaginaMemoria2(m, paginaAsair, p.indice); // troca pagina na memoria
-                printf("Removeu pagina %d e adicionou pagina %d na memoria e na lista\n", paginaAsair, p.indice);
+                //printf("Removeu pagina %d e adicionou pagina %d na memoria e na lista\n", paginaAsair, p.indice);
             }
         }
         //printf("%c %d\n", comando, pagina);
+        acessos++;
     }
     fclose(arq);
 
@@ -76,18 +77,19 @@ void executarSegundaChance(){
     */
     libera_lista_segunda_chance(li);
     libera_Memoria(m);
+    printf("Tamanho da memória: %d\n", m->tamanho);
+    printf("Número total de acessos: %d\n", acessos);
     printf("Numero total de faltas: %d\n", faltas);
 }
 
-void executarWSClock(){
+int executarWSClock(int tau){
     char comando;
     int pagina, M, P, faltas = 0;
     FILE *arq = fopen("ArquivoTeste.txt", "r");
-    int i = 0;
-
+    int i = 0, acessos = 0;
     fscanf(arq, "%d %d\n", &M, &P);
     Memoria m = iniciarMemoria(M);
-    ListaWSClock li = cria_lista_WSClock(10);
+    ListaWSClock li = cria_lista_WSClock(tau);
 
     while(!feof(arq)){
         /* Verifica se arquivo é válido*/
@@ -101,6 +103,7 @@ void executarWSClock(){
         Pagina p = {pagina, 0, 0, 0, 0, li->tempo};
 
         if(temPagina(m, p.indice)){ // se a pagina já está na memoria, atualizar R e/ou W dela
+            //printf("Pagina %d já está na memória\n", p.indice);
             if(ESCRITA == comando){ // foi lido um W
                 atualizar_escrita_pagina_wsclock(li, p.indice);
             }
@@ -111,26 +114,32 @@ void executarWSClock(){
             faltas++;
             if(temMolduraVazia(m)){ // tem moldura vazia
                 inserirPaginaMemoria1(m, p.indice); // insere na memoria
-                insere_pagina_final_wsclock(li, p); // insere na lista de segunda chance
-                printf("Adicionou pagina %d na memoria e na lista wsclock\n", p.indice);
+                insere_pagina_final_wsclock(li, p); // insere na lista wsclock
+                //printf("Adicionou pagina %d na memoria e na lista wsclock\n", p.indice);
             }else{
                 /* passa qual pagina ira entrar e informa qual saiu */
                 int paginaAsair = substituir_pagina_lista_wsclock(li, p);
                 inserirPaginaMemoria2(m, paginaAsair, p.indice); // troca pagina na memoria
-                printf("Removeu pagina %d e adicionou pagina %d na memoria e na lista wsclock\n",
-                        paginaAsair, p.indice);
+                //printf("Removeu pagina %d e adicionou pagina %d na memoria e na lista wsclock\n",
+                        //paginaAsair, p.indice);
             }
         }
         li->tempo += 1;
         atualizar_idade_paginas_wsclock(li);
+        acessos++;
     }
     fclose(arq);
 
-    printf("\n\n\nLista wsclock:\n");
+    /*printf("\n\n\nLista wsclock:\n");
     imprime_lista_wsclock(li);
     printf("\n\n\nMemoria:\n");
     imprime_memoria(m);
+    */
     libera_lista_wsclock(li);
     libera_Memoria(m);
+    printf("Tamanho da memória: %d\n", m->tamanho);
+    printf("Número total de acessos: %d\n", acessos);
     printf("Numero total de faltas: %d\n", faltas);
+    printf("Tempo percorrido: %d\n", li->tempo);
+    return faltas;
 }
