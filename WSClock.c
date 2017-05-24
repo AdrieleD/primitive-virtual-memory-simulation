@@ -54,9 +54,9 @@ int insere_pagina_final_wsclock(ListaWSClock li, Pagina p){
 
 int substituir_pagina_lista_wsclock(ListaWSClock li, Pagina p){
     if(li == NULL)
-        return 0;
+        return -1;
     if(li->primeiro == NULL)//lista vazia
-        return 0;
+        return -1;
 
     int pagina;
     ElemWSClock *no = li->primeiro;
@@ -84,7 +84,7 @@ int substituir_pagina_lista_wsclock(ListaWSClock li, Pagina p){
 
         no = no->prox;
     }
-    return 0;
+    return -1;
 }
 
 void atualizar_idade_paginas_wsclock(ListaWSClock li){
@@ -148,4 +148,52 @@ void imprime_lista_wsclock(ListaWSClock li){
         no = no->prox;
         i++;
     }
+}
+
+int melhorTau(char *nomeArq){
+    /* Buscar melhor tau*/
+    int i, j, k, l;
+    j = executarWSClock(nomeArq, 0);
+    l = 0;
+    for(i = 1; i < 100; i++){
+        k = executarWSClock(nomeArq, i);
+        if(k < j){
+            j = k;
+            l = i;
+        }
+    }
+    //printf("\tMelhor Reposta: %d\t com i: %d\n", j, l);
+    return l;
+}
+
+int substituir_pagina_lista_wsclock_atualizado(ListaWSClock li, Pagina p){
+    if(li == NULL)
+        return -1;
+    if(li->primeiro == NULL)//lista vazia
+        return -1;
+    ElemWSClock *no = li->primeiro;
+    int pagina;
+    while(1){ // irá executar até remover alguma pagina
+        if(li->primeiro->pagina.R == NAOREFERENCIADA){ // Bit R for 0
+            if(li->primeiro->pagina.idade > li->tau){ // se idade > tau não está no WS
+                if(li->primeiro->pagina.W == NAOESCRITA){  // nao está suja
+                    pagina = li->primeiro->pagina.indice; // pagina a sair
+                    li->primeiro->pagina = p; // substituir pagina
+                    return pagina;
+                }else{
+                    li->primeiro->pagina.W = NAOESCRITA; // marcada para ser gravada
+                }
+            }
+        }else{
+            li->primeiro->pagina.R = NAOREFERENCIADA; // Passar R para 0 caso esteja com 1
+        }
+
+        if(no == li->primeiro){  // caso já tenha dado uma volta, envelhecer paginas
+            li->tempo += 1;
+            atualizar_idade_paginas_wsclock(li);
+        }
+
+        li->primeiro = li->primeiro->prox;
+    }
+    return -1;
 }

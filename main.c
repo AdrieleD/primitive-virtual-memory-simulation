@@ -21,20 +21,6 @@ int main(){
     //executarSegundaChance();
     //executarWSClock(26);
 
-    /* Buscar melhor tau*/
-    /*int i, j, k, l;
-    j = executarWSClock(1);
-    for(i = 2; i < 100; i++){
-        k = executarWSClock(i);
-        if(k < j){
-            j = k;
-            l = i;
-        }
-    }
-
-    printf("Melhor Reposta: %d\t com i: %d\n", j, l);
-    */
-
     //gerarArquivoTeste("teste.txt", 10000, 20, 50);
 
     //startProcessManager();
@@ -53,6 +39,7 @@ void menu(){
         printf("\t*\t(3) NUR                                                 *\n");
         printf("\t*\t(4) LRU                                                 *\n");
         printf("\t*\t(5) Gerador de arquivos testes                          *\n");
+        printf("\t*\t(6) Determinar melhor valo de tau                       *\n");
         printf("\t*\t(0) Finalizar Simulador                                 *\n");
         printf("\t*                                                               *");
         printf("\n\t* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n ");
@@ -79,6 +66,10 @@ void menu(){
             case 5:
                 system("clear || cls");
                 geradorArquivos();
+                break;
+            case 6:
+                system("clear || cls");
+                buscarMelhorValorTau();
                 break;
             case 0:
                 printf("\n\tSimulador Finalizado com sucesso.\n");
@@ -142,6 +133,19 @@ void geradorArquivos(){
     }
     system("clear || cls");
     //menu();
+}
+
+void buscarMelhorValorTau(){
+    printf("\n\t* * * * * * *DETERMINAR MELHOR VALOR DE TAU* * * * * * *\n");
+    char nomeArq[TAM];
+    int valor;
+    printf("\tNome do arquivo do arquivo de teste: ");
+    gets(&nomeArq);
+    valor = melhorTau(nomeArq);
+    printf("\tO melhor valor de tau encontrado foi: %d\n", valor);
+    printf("\tPressione ENTER para continuar...");
+    getchar();
+    system("clear || cls");
 }
 
 void limparBuffer(){

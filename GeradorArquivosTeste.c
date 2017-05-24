@@ -26,7 +26,7 @@ int gerarArquivoTeste(char *nome, int numAcessos, int tamanhoMemoria, int numPag
 
         for(i = 0; i < numAcessos; i++){
             comando = valorAleatorio(0, 2);
-            pagina = valorAleatorio(1, numPaginas);
+            pagina = valorAleatorio(0, numPaginas);
             if(comando){
                 fprintf(arq, "%c %d\n", 'R', pagina);
             }else{

@@ -46,7 +46,7 @@ void executarSegundaChance(char *nomeArq){
     while(!feof(arq)){
         fscanf(arq, "%c %d\n", &comando, &pagina);
         // indice   R   W   classe  idade   ultimaVezUsada
-        Pagina p = {pagina, 0, 0, 0, 0, 0};
+        Pagina p = {pagina, 1, 0, 0, 0, 0};
 
         if(temPagina(m, p.indice)){ // se a pagina já está na memoria, atualizar R dela
             //printf("Pagina %d referenciada\n", p.indice);
@@ -102,7 +102,7 @@ int executarWSClock(char *nomeArq, int tau){
 
         fscanf(arq, "%c %d\n", &comando, &pagina);
         // indice   R   W   classe  idade   ultimaVezUsada
-        Pagina p = {pagina, 0, 0, 0, 0, li->tempo};
+        Pagina p = {pagina, 1, 0, 0, 0, li->tempo};
 
         if(temPagina(m, p.indice)){ // se a pagina já está na memoria, atualizar R e/ou W dela
             //printf("Pagina %d já está na memória\n", p.indice);
@@ -120,7 +120,8 @@ int executarWSClock(char *nomeArq, int tau){
                 //printf("Adicionou pagina %d na memoria e na lista wsclock\n", p.indice);
             }else{
                 /* passa qual pagina ira entrar e informa qual saiu */
-                int paginaAsair = substituir_pagina_lista_wsclock(li, p);
+                //int paginaAsair = substituir_pagina_lista_wsclock(li, p);
+                int paginaAsair = substituir_pagina_lista_wsclock_atualizado(li, p);
                 inserirPaginaMemoria2(m, paginaAsair, p.indice); // troca pagina na memoria
                 //printf("Removeu pagina %d e adicionou pagina %d na memoria e na lista wsclock\n",
                         //paginaAsair, p.indice);

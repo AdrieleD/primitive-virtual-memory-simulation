@@ -26,5 +26,7 @@ void atualizar_idade_paginas_wsclock(ListaWSClock li);
 void atualizar_ultima_referencia_pagina_wsclock(ListaWSClock li, int p);
 void atualizar_escrita_pagina_wsclock(ListaWSClock li, int p);
 void imprime_lista_wsclock(ListaWSClock li);
+int melhorTau(char *nomeArq);
+int substituir_pagina_lista_wsclock_atualizado(ListaWSClock li, Pagina p);
 
 #endif // WSCLOCK_H_INCLUDED
