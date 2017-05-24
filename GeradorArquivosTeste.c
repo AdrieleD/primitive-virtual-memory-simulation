@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
-int gerarArquivoTeste(int numAcessos, int tamanhoMemoria, int numPaginas){
+int gerarArquivoTeste(char *nome, int numAcessos, int tamanhoMemoria, int numPaginas){
 
-    char url[]="ArquivoTeste.txt";
+    //char url[]="ArquivoTeste.txt";
+    char url[100];
+    strcpy(url, nome);
 	char ch;
 	FILE *arq;
     int i;
@@ -12,8 +15,10 @@ int gerarArquivoTeste(int numAcessos, int tamanhoMemoria, int numPaginas){
     srand(time(NULL));
 
 	arq = fopen(url, "w");
-	if(arq == NULL)
+	if(arq == NULL){
 		printf("Erro, nao foi possivel abrir o arquivo\n");
+        return 1;
+    }
 	else{
         int comando, pagina;
 

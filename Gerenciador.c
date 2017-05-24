@@ -17,7 +17,7 @@ void lerArquivo(){
     while(!feof(arq)){
         /* Verifica se arquivo é válido*/
         if (arq == NULL){
-            printf("Erro ao abrir arquivo!\n");
+            printf("\tErro ao abrir arquivo!\n");
             return;
         }
 
@@ -27,10 +27,16 @@ void lerArquivo(){
     fclose(arq);
 }
 
-void executarSegundaChance(){
+void executarSegundaChance(char *nomeArq){
     char comando;
     int pagina, M, P, faltas = 0;
-    FILE *arq = fopen("ArquivoTeste.txt", "r");
+    FILE *arq = fopen(nomeArq, "r");
+    /* Verifica se arquivo é válido*/
+    if (arq == NULL){
+        printf("\tErro ao abrir arquivo!\n");
+        return;
+    }
+
     int i = 0, acessos = 0;
 
     fscanf(arq, "%d %d\n", &M, &P);
@@ -38,12 +44,6 @@ void executarSegundaChance(){
     ListaSegundaChance* li = cria_lista_segunda_chance();
 
     while(!feof(arq)){
-        /* Verifica se arquivo é válido*/
-        if (arq == NULL){
-            printf("Erro ao abrir arquivo!\n");
-            return;
-        }
-
         fscanf(arq, "%c %d\n", &comando, &pagina);
         // indice   R   W   classe  idade   ultimaVezUsada
         Pagina p = {pagina, 0, 0, 0, 0, 0};
@@ -77,26 +77,28 @@ void executarSegundaChance(){
     */
     libera_lista_segunda_chance(li);
     libera_Memoria(m);
-    printf("Tamanho da memória: %d\n", m->tamanho);
-    printf("Número total de acessos: %d\n", acessos);
-    printf("Numero total de faltas: %d\n", faltas);
+    printf("\tTamanho da memória: %d\n", m->tamanho);
+    printf("\tNúmero total de acessos: %d\n", acessos);
+    printf("\tNumero total de faltas: %d\n", faltas);
 }
 
-int executarWSClock(int tau){
+int executarWSClock(char *nomeArq, int tau){
     char comando;
     int pagina, M, P, faltas = 0;
-    FILE *arq = fopen("ArquivoTeste.txt", "r");
+    FILE *arq = fopen(nomeArq, "r");
+    /* Verifica se arquivo é válido*/
+    if (arq == NULL){
+        printf("\tErro ao abrir arquivo!\n");
+        return;
+    }
+
     int i = 0, acessos = 0;
     fscanf(arq, "%d %d\n", &M, &P);
     Memoria m = iniciarMemoria(M);
     ListaWSClock li = cria_lista_WSClock(tau);
 
     while(!feof(arq)){
-        /* Verifica se arquivo é válido*/
-        if (arq == NULL){
-            printf("Erro ao abrir arquivo!\n");
-            return;
-        }
+
 
         fscanf(arq, "%c %d\n", &comando, &pagina);
         // indice   R   W   classe  idade   ultimaVezUsada
@@ -137,9 +139,9 @@ int executarWSClock(int tau){
     */
     libera_lista_wsclock(li);
     libera_Memoria(m);
-    printf("Tamanho da memória: %d\n", m->tamanho);
-    printf("Número total de acessos: %d\n", acessos);
-    printf("Numero total de faltas: %d\n", faltas);
-    printf("Tempo percorrido: %d\n", li->tempo);
+    printf("\tTamanho da memória: %d\n", m->tamanho);
+    printf("\tNúmero total de acessos: %d\n", acessos);
+    printf("\tNumero total de faltas: %d\n", faltas);
+    //printf("\tTempo percorrido: %d\n", li->tempo);
     return faltas;
 }
