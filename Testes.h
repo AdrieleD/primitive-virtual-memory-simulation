@@ -10,5 +10,6 @@ void testeSegundaChance();
 void testeSegundaChanceRemocao();
 void testeExecucaoSegundaChance();
 void testeCriarListaWSClock();
+void testeExecuxaoLRU();
 
 #endif // TESTES_H_INCLUDED

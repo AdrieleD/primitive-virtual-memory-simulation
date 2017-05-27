@@ -4,23 +4,28 @@
 #include "Pagina.h"
 #include "SegundaChance.h"
 #include "WSClock.h"
+#include "LRU.h"
 
-void testeCriarMemoria(){
+void testeCriarMemoria()
+{
     Memoria m = iniciarMemoria(10);
     printf("Tamanho da memoria: %d\n", m->tamanho);
     imprime_memoria(m);
     libera_Memoria(m);
 }
 
-void testeInsercaoPaginas(){
+void testeInsercaoPaginas()
+{
     Memoria m = iniciarMemoria(10);
     // indice   R   W   classe  idade   ultimaVezUsada
     Pagina p[] = {{35, 1, 1, 0, 0, 1},
-                  {7, 1, 1, 0, 0, 1},
-                  {25, 1, 1, 0, 0, 1},
-                  {17, 1, 1, 0, 0, 1}};
+        {7, 1, 1, 0, 0, 1},
+        {25, 1, 1, 0, 0, 1},
+        {17, 1, 1, 0, 0, 1}
+    };
     int i;
-    for(i = 0; i < 4; i++){
+    for(i = 0; i < 4; i++)
+    {
         inserirPaginaMemoria1(m, p[i].indice);
     }
 
@@ -28,7 +33,8 @@ void testeInsercaoPaginas(){
     libera_Memoria(m);
 }
 
-void testePaginaPresente(){
+void testePaginaPresente()
+{
     Memoria m = iniciarMemoria(10);
     // indice   R   W   classe  idade   ultimaVezUsada
     Pagina p = {35, 1, 1, 0, 0, 1};
@@ -41,17 +47,20 @@ void testePaginaPresente(){
     libera_Memoria(m);
 }
 
-void testeMemoriaVazia(){
+void testeMemoriaVazia()
+{
     Memoria m = iniciarMemoria(5);
     // indice   R   W   classe  idade   ultimaVezUsada
     Pagina p[] = {{35, 1, 1, 0, 0, 1},
-                  { 7, 1, 1, 0, 0, 1},
-                  {25, 1, 1, 0, 0, 1},
-                  {17, 1, 1, 0, 0, 1}};
+        { 7, 1, 1, 0, 0, 1},
+        {25, 1, 1, 0, 0, 1},
+        {17, 1, 1, 0, 0, 1}
+    };
 
     printf("Memoria cheia?: %d\n", !temMolduraVazia(m));
     int i;
-    for(i = 0; i < 4; i++){
+    for(i = 0; i < 4; i++)
+    {
         inserirPaginaMemoria1(m, p[i].indice);
     }
 
@@ -61,12 +70,14 @@ void testeMemoriaVazia(){
     libera_Memoria(m);
 }
 
-void testeSegundaChance(){
+void testeSegundaChance()
+{
     // indice   R   W   classe  idade   ultimaVezUsada
     Pagina p[] = {{35, 1, 1, 0, 0, 1},
-                  { 7, 1, 1, 0, 0, 1},
-                  {25, 1, 1, 0, 0, 1},
-                  {17, 1, 1, 0, 0, 1}};
+        { 7, 1, 1, 0, 0, 1},
+        {25, 1, 1, 0, 0, 1},
+        {17, 1, 1, 0, 0, 1}
+    };
     ListaSegundaChance* li = cria_lista_segunda_chance();
     printf("Tamanho: %d\n\n\n\n",tamanho_lista_segunda_chance(li));
 
@@ -80,12 +91,14 @@ void testeSegundaChance(){
     libera_lista_segunda_chance(li);
 }
 
-void testeSegundaChanceRemocao(){
+void testeSegundaChanceRemocao()
+{
     // indice   R   W   classe  idade   ultimaVezUsada
     Pagina p[] = {{35, 1, 1, 0, 0, 1},
-                  { 7, 1, 1, 0, 0, 1},
-                  {25, 1, 1, 0, 0, 1},
-                  {17, 1, 1, 0, 0, 1}};
+        { 7, 1, 1, 0, 0, 1},
+        {25, 1, 1, 0, 0, 1},
+        {17, 1, 1, 0, 0, 1}
+    };
     ListaSegundaChance* li = cria_lista_segunda_chance();
 
     int i;
@@ -103,28 +116,37 @@ void testeSegundaChanceRemocao(){
     libera_lista_segunda_chance(li);
 }
 
-void testeExecucaoSegundaChance(){
+void testeExecucaoSegundaChance()
+{
     Memoria m = iniciarMemoria(2);
     ListaSegundaChance* li = cria_lista_segunda_chance();
     int i;
     // indice   R   W   classe  idade   ultimaVezUsada
     Pagina p[] = {{35, 0, 1, 0, 0, 1},
-                  {35, 0, 1, 0, 0, 1},
-                  {25, 0, 1, 0, 0, 1},
-                  { 7, 0, 1, 0, 0, 1},
-                  {35, 0, 1, 0, 0, 1},
-                  {17, 0, 1, 0, 0, 1}};
+        {35, 0, 1, 0, 0, 1},
+        {25, 0, 1, 0, 0, 1},
+        { 7, 0, 1, 0, 0, 1},
+        {35, 0, 1, 0, 0, 1},
+        {17, 0, 1, 0, 0, 1}
+    };
 
-    for(i = 0; i < 6; i++){ // execucao
-        if(temPagina(m, p[i].indice)){ // se a pagina já está na memoria, atualizar R dela
+    for(i = 0; i < 6; i++)  // execucao
+    {
+        if(temPagina(m, p[i].indice))  // se a pagina já está na memoria, atualizar R dela
+        {
             printf("Pagina %d referenciada\n", p[i].indice);
             atualizaRSegundaChance(li, p[i].indice);
-        }else{
-            if(temMolduraVazia(m)){ // tem moldura vazia
+        }
+        else
+        {
+            if(temMolduraVazia(m))  // tem moldura vazia
+            {
                 inserirPaginaMemoria1(m, p[i].indice); // insere na memoria
                 insere_lista_final_segunda_chance(li, p[i]); // insere na lista de segunda chance
                 printf("Adicionou pagina %d na memoria e na lista\n", p[i].indice);
-            }else{
+            }
+            else
+            {
                 int paginaAsair = remove_lista_segunda_chance(li); // determina qual pagina irá sair
                 insere_lista_final_segunda_chance(li, p[i]); // insere pagina na lista de segunda chance
                 inserirPaginaMemoria2(m, paginaAsair, p[i].indice); // troca pagina na memoria
@@ -141,15 +163,18 @@ void testeExecucaoSegundaChance(){
     libera_Memoria(m);
 }
 
-void testeCriarListaWSClock(){
+void testeCriarListaWSClock()
+{
     ListaWSClock ws = cria_lista_WSClock(10);
     // indice   R   W   classe  idade   ultimaVezUsada
     Pagina p[] = {{35, 1, 1, 0, 0, 1},
-                  { 7, 1, 1, 0, 0, 1},
-                  {25, 1, 1, 0, 0, 1},
-                  {17, 1, 1, 0, 0, 1}};
+        { 7, 1, 1, 0, 0, 1},
+        {25, 1, 1, 0, 0, 1},
+        {17, 1, 1, 0, 0, 1}
+    };
     int i;
-    for(i = 0; i < 4; i++){
+    for(i = 0; i < 4; i++)
+    {
         insere_pagina_final_wsclock(ws, p[i]);
     }
     printf("Tamanho da lista: %d\n", ws->tamanho);
@@ -157,32 +182,41 @@ void testeCriarListaWSClock(){
     libera_lista_wsclock(ws);
 }
 
-void testeExecucaoWSClock(){
+void testeExecucaoWSClock()
+{
     Memoria m = iniciarMemoria(2);
     ListaWSClock li = cria_lista_WSClock(30);
     int i, tipoReferencia;
     // indice   R   W   classe  idade   ultimaVezUsada
     Pagina p[] = {{35, 0, 0, 0, 0, 1},
-                  {25, 0, 0, 0, 0, 1},
-                  { 7, 0, 0, 0, 0, 1},
-                  {35, 0, 0, 0, 0, 1},
-                  {17, 0, 0, 0, 0, 1}};
+        {25, 0, 0, 0, 0, 1},
+        { 7, 0, 0, 0, 0, 1},
+        {35, 0, 0, 0, 0, 1},
+        {17, 0, 0, 0, 0, 1}
+    };
 
-    for(i = 0; i < 5; i++){ // execucao
+    for(i = 0; i < 5; i++)  // execucao
+    {
         p[i].ultimaVezUsada = li->tempo;
-        if(temPagina(m, p[i].indice)){ // se a pagina já está na memoria, atualizar R e/ou W dela
+        if(temPagina(m, p[i].indice))  // se a pagina já está na memoria, atualizar R e/ou W dela
+        {
             /*if(ESCRITA == tipoReferencia){ // foi lido um W
                 atualizar_escrita_pagina_wsclock(li, p[i].indice);
             }
             else{ // foi lido um R
                 atualizar_ultima_referencia_pagina_wsclock(li, p[i].indice);
             }*/
-        }else{ // pagina não está na memoria, substituir pagina ou não (tem moldura vazia)
-            if(temMolduraVazia(m)){ // tem moldura vazia
+        }
+        else   // pagina não está na memoria, substituir pagina ou não (tem moldura vazia)
+        {
+            if(temMolduraVazia(m))  // tem moldura vazia
+            {
                 inserirPaginaMemoria1(m, p[i].indice); // insere na memoria
                 insere_pagina_final_wsclock(li, p[i]); // insere na lista de segunda chance
                 printf("Adicionou pagina %d na memoria e na lista wsclock\n", p[i].indice);
-            }else{
+            }
+            else
+            {
                 /* passa qual pagina ira entrar e informa qual saiu */
                 int paginaAsair = substituir_pagina_lista_wsclock(li, p[i]);
                 printf("Valor retornado: %d\n", paginaAsair);
@@ -200,4 +234,22 @@ void testeExecucaoWSClock(){
     imprime_memoria(m);
     libera_lista_wsclock(li);
     libera_Memoria(m);
+}
+
+void testeListaLRU()
+{
+    ListaLRU lista;
+    CriaListaLRU(&lista);
+    Pagina p[] = {{35, 1, 1, 0, 0, 1},
+        { 7, 1, 1, 0, 0, 1},
+        {25, 1, 1, 0, 0, 1},
+        {17, 1, 1, 0, 0, 1}
+    };
+    int i;
+    for(i = 0; i < 4; i++)
+    {
+        insere_pagina_lru_ordenada(&lista, p[i]);
+    }
+    printf("tamanho lista: %d.\n", lista.tamanho);
+    imprime_lista_lru(&lista);
 }

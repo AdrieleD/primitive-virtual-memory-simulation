@@ -39,6 +39,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Gerenciador.h" />
+		<Unit filename="LRU.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="LRU.h" />
 		<Unit filename="Memoria.c">
 			<Option compilerVar="CC" />
 		</Unit>

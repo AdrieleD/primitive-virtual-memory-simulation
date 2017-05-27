@@ -57,7 +57,7 @@ void menu(){
                 break;
             case 3:
                 system("clear || cls");
-
+                LRU();
                 break;
             case 4:
                 system("clear || cls");
@@ -108,6 +108,19 @@ void wsclock(){
 
     printf("\tPressione ENTER para continuar...");
     limparBuffer();
+    getchar();
+    system("clear || cls");
+    //menu();
+}
+
+void LRU(){
+    printf("\n\t* * * * * * *ALGORITMO: LRU* * * * * * *\n");
+    char nomeArq[TAM];
+    printf("\tNome do arquivo de teste: ");
+    gets(&nomeArq);
+    executarLRU(nomeArq);
+    //testeExecuxaoLRU();
+    printf("\tPressione ENTER para continuar...");
     getchar();
     system("clear || cls");
     //menu();
