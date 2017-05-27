@@ -214,7 +214,7 @@ void executarLRU(char *nomeArq)
             {
                 /* passa qual pagina ira entrar e informa qual saiu */
                 int paginaAsair = substituir_pagina_lista_lru(&li, p);
-                //nserirPaginaMemoria2(m, paginaAsair, p.indice); // troca pagina na memoria
+                inserirPaginaMemoria2(m, paginaAsair, p.indice); // troca pagina na memoria
                 //printf("Removeu pagina %d e adicionou pagina %d na memoria e na lista lru\n", paginaAsair, p.indice);
             }
         }

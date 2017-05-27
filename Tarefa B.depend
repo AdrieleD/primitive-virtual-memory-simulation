@@ -135,3 +135,76 @@
 1495874903 /home/adriele/Dropbox/CIÊNCIA DA COMPUTAÇÃO -  UFV/7º SEMESTRE/Sistemas Operacionais/primitive-virtual-memory-simulation/LRU.h
 	"Pagina.h"
 
+1495913285 source:/home/adriele/primitive-virtual-memory-simulation/GeradorArquivosTeste.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+
+1495913299 source:/home/adriele/primitive-virtual-memory-simulation/LRU.c
+	<stdio.h>
+	<stdlib.h>
+	"LRU.h"
+
+1495913299 /home/adriele/primitive-virtual-memory-simulation/LRU.h
+	"Pagina.h"
+
+1495913285 /home/adriele/primitive-virtual-memory-simulation/Pagina.h
+
+1495913285 source:/home/adriele/primitive-virtual-memory-simulation/Memoria.c
+	<stdio.h>
+	<stdlib.h>
+	"Memoria.h"
+
+1495913285 /home/adriele/primitive-virtual-memory-simulation/Memoria.h
+	"Moldura.h"
+
+1495913285 /home/adriele/primitive-virtual-memory-simulation/Moldura.h
+
+1495913285 source:/home/adriele/primitive-virtual-memory-simulation/SegundaChance.c
+	<stdio.h>
+	<stdlib.h>
+	"SegundaChance.h"
+
+1495913285 /home/adriele/primitive-virtual-memory-simulation/SegundaChance.h
+	"Pagina.h"
+
+1495913299 source:/home/adriele/primitive-virtual-memory-simulation/Testes.c
+	<stdio.h>
+	<stdlib.h>
+	"Memoria.h"
+	"Pagina.h"
+	"SegundaChance.h"
+	"WSClock.h"
+	"LRU.h"
+
+1495913285 /home/adriele/primitive-virtual-memory-simulation/WSClock.h
+	"Pagina.h"
+
+1495913285 source:/home/adriele/primitive-virtual-memory-simulation/WSClock.c
+	<stdio.h>
+	<stdlib.h>
+	"WSClock.h"
+
+1495913462 source:/home/adriele/primitive-virtual-memory-simulation/Gerenciador.c
+	<stdio.h>
+	<stdlib.h>
+	"Gerenciador.h"
+	"Memoria.h"
+	"SegundaChance.h"
+	"WSClock.h"
+	"LRU.h"
+
+1495913299 /home/adriele/primitive-virtual-memory-simulation/Gerenciador.h
+
+1495913448 source:/home/adriele/primitive-virtual-memory-simulation/main.c
+	<stdio.h>
+	<stdlib.h>
+	"Testes.h"
+	"Gerenciador.h"
+	"GeradorArquivosTeste.h"
+
+1495913299 /home/adriele/primitive-virtual-memory-simulation/Testes.h
+
+1495913285 /home/adriele/primitive-virtual-memory-simulation/GeradorArquivosTeste.h
+

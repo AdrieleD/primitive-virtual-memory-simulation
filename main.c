@@ -57,11 +57,11 @@ void menu(){
                 break;
             case 3:
                 system("clear || cls");
-                LRU();
+
                 break;
             case 4:
                 system("clear || cls");
-
+                LRU();
                 break;
             case 5:
                 system("clear || cls");
@@ -86,7 +86,7 @@ void menu(){
 void segundaChance(){
     printf("\n\t* * * * * * *ALGORITMO: SEGUNDA CHANCE* * * * * * *\n");
     char nomeArq[TAM];
-    printf("\tNome do arquivo do arquivo de teste: ");
+    printf("\tNome do arquivo de teste: ");
     gets(&nomeArq);
     executarSegundaChance(nomeArq);
 
@@ -100,7 +100,7 @@ void wsclock(){
     printf("\n\t* * * * * * *ALGORITMO: WSCLOCK* * * * * * *\n");
     char nomeArq[TAM];
     int tau;
-    printf("\tNome do arquivo do arquivo de teste: ");
+    printf("\tNome do arquivo de teste: ");
     gets(&nomeArq);
     printf("\tInforme o valor de tau: ");
     scanf("%d", &tau);
