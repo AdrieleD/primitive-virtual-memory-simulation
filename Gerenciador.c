@@ -207,12 +207,11 @@ void executarNRU(char *nomeArq)
             if(temMolduraVazia(m))  // tem moldura vazia
             {
                 inserirPaginaMemoria1(m, p.indice); // insere na memoria
-                insere_pagina_nru_ordenada(&li, p); // insere na lista lru
+                insere_pagina_nru(&li, p); // insere na lista nru
                 //printf("Adicionou pagina %d na memoria e na lista nru\n", p.indice);
             }
             else
             {
-                atribuiClasse(&li);
                 /* passa qual pagina ira entrar e informa qual saiu */
                 int paginaAsair = substituir_pagina_lista_nru(&li, p);
                 inserirPaginaMemoria2(m, paginaAsair, p.indice); // troca pagina na memoria
@@ -224,8 +223,8 @@ void executarNRU(char *nomeArq)
     }
     fclose(arq);
 
-    printf("\n\n\nLista nru:\n");
-    imprime_lista_nru(&li);
+//    printf("\n\n\nLista nru:\n");
+//    imprime_lista_nru(&li);
 //    printf("\n\n\nMemoria:\n");
 //    imprime_memoria(m);
 

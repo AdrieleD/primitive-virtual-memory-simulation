@@ -42,7 +42,7 @@ void menu()
         printf("\t*\t(3) NUR                                                 *\n");
         printf("\t*\t(4) LRU                                                 *\n");
         printf("\t*\t(5) Gerador de arquivos testes                          *\n");
-        printf("\t*\t(6) Determinar melhor valo de tau                       *\n");
+        printf("\t*\t(6) Determinar melhor valor de tau                       *\n");
         printf("\t*\t(0) Finalizar Simulador                                 *\n");
         printf("\t*                                                               *");
         printf("\n\t* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n ");
@@ -126,8 +126,8 @@ void NRU()
     char nomeArq[TAM];
     printf("\tNome do arquivo de teste: ");
     gets(&nomeArq);
-    executarNRU(nomeArq);
-    //testeListaNRU();
+    //executarNRU(nomeArq);
+    testeListaNRU();
     printf("\tPressione ENTER para continuar...");
     getchar();
     system("clear || cls");
@@ -177,7 +177,7 @@ void buscarMelhorValorTau()
     printf("\n\t* * * * * * *DETERMINAR MELHOR VALOR DE TAU* * * * * * *\n");
     char nomeArq[TAM];
     int valor;
-    printf("\tNome do arquivo do arquivo de teste: ");
+    printf("\tNome do arquivo de teste: ");
     gets(&nomeArq);
     valor = melhorTau(nomeArq);
     printf("\tO melhor valor de tau encontrado foi: %d\n", valor);

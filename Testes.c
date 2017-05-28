@@ -257,18 +257,50 @@ void testeListaLRU()
 
 void testeListaNRU()
 {
-    ListaNRU lista;
-    CriaListaNRU(&lista);
-    Pagina p[] = {{35, 0, 0, 0, 0, 1},
-        { 7, 1, 1, 0, 0, 1},
-        {25, 1, 1, 0, 0, 1},
-        {17, 1, 1, 0, 0, 1}
+    Memoria m = iniciarMemoria(2);
+    ListaNRU li;
+    CriaListaNRU(&li);
+    int i, tipoReferencia, paginaAsair;
+    // indice   R   W   classe  idade   ultimaVezUsada
+    Pagina p[] = {{35, 0, 0, 3, 0, 1},
+        {25, 0, 0, 0, 0, 1},
+        { 7, 0, 0, 0, 0, 1},
+        {9, 0, 0, 1, 0, 1},
+        {17, 0, 0, 2, 0, 1}
     };
-    int i;
-    for(i = 0; i < 4; i++)
+
+    for(i = 0; i < 5; i++)  // execucao
     {
-        insere_pagina_nru_ordenada(&lista, p[i]);
+        p[i].ultimaVezUsada = li.tempo;
+        if(temPagina(m, p[i].indice))  // se a pagina já está na memoria, atualizar R e/ou W dela
+        {
+
+        }
+        else   // pagina não está na memoria, substituir pagina ou não (tem moldura vazia)
+        {
+            if(temMolduraVazia(m))  // tem moldura vazia
+            {
+                inserirPaginaMemoria1(m, p[i].indice); // insere na memoria
+                insere_pagina_nru(&li, p[i]); // insere na lista nru
+                printf("Adicionou pagina %d na memoria e na lista nru\n", p[i].indice);
+            }
+            else
+            {
+                /* passa qual pagina ira entrar e informa qual saiu */
+                paginaAsair = substituir_pagina_lista_nru(&li, p[i]);
+                printf("Valor retornado: %d\n", paginaAsair);
+                inserirPaginaMemoria2(m, paginaAsair, p[i].indice); // troca pagina na memoria
+                printf("Removeu pagina %d e adicionou pagina %d na memoria e na lista nru\n", paginaAsair, p[i].indice);
+            }
+        }
+        li.tempo += 1;
+        paginaAsair = 0;
     }
-    printf("tamanho lista: %d.\n", lista.tamanho);
-    imprime_lista_nru(&lista);
+
+    printf("\n\n\nLista nru:\n");
+    imprime_lista_nru(&li);
+    printf("\n\n\nMemoria:\n");
+    imprime_memoria(m);
+    //libera_lista_nru(&li);
+    libera_Memoria(m);
 }

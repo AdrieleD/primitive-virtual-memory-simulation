@@ -27,42 +27,12 @@ void libera_lista_nru(ListaNRU *li)
     }
 }
 
-void insere_pagina_nru_ordenada(ListaNRU *li, Pagina p)
+void insere_pagina_nru(ListaNRU *lista, Pagina p)
 {
-    if(li->primeiro == NULL)
-        return 0;
-    elementoNRU *no = (elementoNRU*) malloc(sizeof(elementoNRU));
-    if(no == NULL)
-        return 0;
-    no->pagina = p;
-    if(no == NULL) //lista vazia: insere início
-    {
-        no->prox = NULL;
-        li->primeiro = no;
-        return 1;
-    }
-    else
-    {
-        elementoNRU *ant, *atual = NULL;
-        atual = li->primeiro;
-        while(atual != NULL && atual->pagina.ultimaVezUsada < p.ultimaVezUsada)
-        {
-            ant = atual;
-            atual = atual->prox;
-        }
-        if(atual == li->primeiro) //insere início
-        {
-            no->prox = li->primeiro;
-            li->primeiro = no;
-        }
-        else
-        {
-            no->prox = atual;
-            ant->prox = no;
-        }
-
-        li->tamanho++;
-    }
+    lista->ultimo->prox = (elementoNRU*)malloc(sizeof(elementoNRU));
+    lista->ultimo = lista->ultimo->prox;
+    lista->ultimo->pagina = p;
+    lista->ultimo->prox = NULL;
 }
 
 void atualizar_ultima_referencia_pagina_nru(ListaNRU *li, int p)
@@ -84,52 +54,32 @@ void atualizar_ultima_referencia_pagina_nru(ListaNRU *li, int p)
 int substituir_pagina_lista_nru(ListaNRU *li, Pagina p)
 {
     if(li == NULL)
-        return -1;
-    if(li->primeiro == NULL)//lista vazia
-        return -1;
+        return;
+    int pagina, i = 0, encontrou = 0;
+    elementoNRU* aux = li->primeiro->prox;
 
-    int pagina;
-    elementoNRU *no = li->primeiro;
-    while(1)  // irá executar até remover alguma pagina
+    do
     {
-        if(no->pagina.classe == CLASSE0)  // CLASSE 0
+        while(aux != NULL)
         {
-            pagina = no->pagina.indice; // pagina a sair
-            no->pagina = p; // substituir pagina
-            return pagina;
-        }
-        else
-        {
-            if(no->pagina.classe == CLASSE1)  // CLASSE 1
+            if(i == aux->pagina.classe)
             {
-                pagina = no->pagina.indice; // pagina a sair
-                no->pagina = p; // substituir pagina
+                encontrou == 1;
+                pagina = aux->pagina.indice; // pagina a sair
+                aux->pagina = p; // substituir pagina
                 return pagina;
             }
-            else
-            {
-                if(no->pagina.classe == CLASSE2)  // CLASSE 2
-                {
-                    pagina = no->pagina.indice; // pagina a sair
-                    no->pagina = p; // substituir pagina
-                    return pagina;
-                }
-                else
-                {
-                    if(no->pagina.classe == CLASSE3)  // CLASSE 3
-                    {
-                        pagina = no->pagina.indice; // pagina a sair
-                        no->pagina = p; // substituir pagina
-                        return pagina;
-                    }
-                }
+            if(encontrou == 1){
+                break;
             }
+            aux = aux->prox;
         }
-
-        no = no->prox;
+        i++;
     }
-    return -1;
+    while(i < 4);
+    encontrou = 0;
 }
+
 
 void atribuiClasse(ListaNRU *li)
 {
@@ -141,22 +91,18 @@ void atribuiClasse(ListaNRU *li)
         if(aux->pagina.R == NAOREFERENCIADA && aux->pagina.W == NAOESCRITA)
         {
             aux->pagina.classe = CLASSE0;
-            break;
         }
         else if(aux->pagina.R == NAOREFERENCIADA && aux->pagina.W == ESCRITA)
         {
             aux->pagina.classe = CLASSE1;
-            break;
         }
         else if(aux->pagina.R == REFERENCIADA && aux->pagina.W == NAOESCRITA)
         {
             aux->pagina.classe = CLASSE2;
-            break;
         }
         else if(aux->pagina.R == REFERENCIADA && aux->pagina.W == ESCRITA)
         {
             aux->pagina.classe = CLASSE3;
-            break;
         }
         aux = aux->prox;
     }
