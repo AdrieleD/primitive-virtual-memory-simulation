@@ -35,18 +35,31 @@ void insere_pagina_nru(ListaNRU *lista, Pagina p)
     lista->ultimo->prox = NULL;
 }
 
-void atualizar_ultima_referencia_pagina_nru(ListaNRU *li, int p)
-{
+void atualizar_ultima_referencia_pagina_nru(ListaNRU *li, int p, int tipoReferencia){
     if(li == NULL)
         return;
     elementoNRU* aux = li->primeiro;
-    while(aux != NULL)
-    {
-        if(p == aux->pagina.indice)
-        {
-            aux->pagina.ultimaVezUsada = li->tempo; // atualiza ultima referencia a pagina
-            break;
+    while(aux != NULL){
+        if(p == aux->pagina.indice){
+            if(tipoReferencia = ESCRITA){
+                aux->pagina.W = 1; // atualiza ultima referencia a pagina
+                aux->pagina.R = 1;
+            }
+            else
+                aux->pagina.R = 1; // atualiza ultima referencia a pagina
+            return;
         }
+        aux = aux->prox;
+    }
+}
+
+/* Setar todos bits R para 0 a cada tempo do SO*/
+void atualizar_referencia_nru(ListaNRU *li){
+    if(li == NULL)
+        return;
+    elementoNRU* aux = li->primeiro;
+    while(aux != NULL){
+        aux->pagina.R = NAOREFERENCIADA;
         aux = aux->prox;
     }
 }
@@ -54,30 +67,24 @@ void atualizar_ultima_referencia_pagina_nru(ListaNRU *li, int p)
 int substituir_pagina_lista_nru(ListaNRU *li, Pagina p)
 {
     if(li == NULL)
-        return;
-    int pagina, i = 0, encontrou = 0;
-    elementoNRU* aux = li->primeiro->prox;
+        return -1;
+    int pagina, i = 0, j = 0;
+    elementoNRU *no = li->primeiro->prox;
 
-    do
-    {
-        while(aux != NULL)
-        {
-            if(i == aux->pagina.classe)
-            {
-                encontrou == 1;
-                pagina = aux->pagina.indice; // pagina a sair
-                aux->pagina = p; // substituir pagina
+    while( i < 4){
+        no = li->primeiro->prox;
+        while(no != NULL){
+            if(i == no->pagina.classe){
+                pagina = no->pagina.indice; // pagina a sair
+                //printf("Valor da pagina eh: %d\n\n", pagina);
+                no->pagina = p; // substituir pagina
                 return pagina;
             }
-            if(encontrou == 1){
-                break;
-            }
-            aux = aux->prox;
+            no = no->prox;
         }
         i++;
     }
-    while(i < 4);
-    encontrou = 0;
+    return -1;
 }
 
 

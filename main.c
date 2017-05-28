@@ -126,8 +126,8 @@ void NRU()
     char nomeArq[TAM];
     printf("\tNome do arquivo de teste: ");
     gets(&nomeArq);
-    //executarNRU(nomeArq);
-    testeListaNRU();
+    executarNRU(nomeArq);
+    //testeListaNRU();
     printf("\tPressione ENTER para continuar...");
     getchar();
     system("clear || cls");

@@ -260,32 +260,26 @@ void testeListaNRU()
     Memoria m = iniciarMemoria(2);
     ListaNRU li;
     CriaListaNRU(&li);
-    int i, tipoReferencia, paginaAsair;
-    // indice   R   W   classe  idade   ultimaVezUsada
-    Pagina p[] = {{35, 0, 0, 3, 0, 1},
-        {25, 0, 0, 0, 0, 1},
-        { 7, 0, 0, 0, 0, 1},
-        {9, 0, 0, 1, 0, 1},
-        {17, 0, 0, 2, 0, 1}
-    };
+    int i, tipoReferencia, paginaAsair, tempoSO = 0;
+        // indice   R   W   classe  idade   ultimaVezUsada
+    Pagina p[] = {{35, 1, 0, 2, 0, 0},
+                  {25, 1, 0, 2, 0, 0},
+                  { 7, 1, 0, 2, 0, 0},
+                  { 9, 1, 0, 2, 0, 0},
+                  {17, 1, 0, 2, 0, 0}};
 
-    for(i = 0; i < 5; i++)  // execucao
-    {
-        p[i].ultimaVezUsada = li.tempo;
-        if(temPagina(m, p[i].indice))  // se a pagina já está na memoria, atualizar R e/ou W dela
-        {
+    for(i = 0; i < 5; i++){  // execucao
+        if(tempoSO%3 == 0) /* Para determinar tempo do SO a cada 3 usos de pagina*/
+            atualizar_referencia_nru(&li); /* Setar todos bits R para 0 a cada tempo do SO*/
+        if(temPagina(m, p[i].indice)){  // se a pagina já está na memoria, atualizar R e/ou W dela
 
-        }
-        else   // pagina não está na memoria, substituir pagina ou não (tem moldura vazia)
-        {
-            if(temMolduraVazia(m))  // tem moldura vazia
-            {
+        }else{   // pagina não está na memoria, substituir pagina ou não (tem moldura vazia)
+            if(temMolduraVazia(m)){  // tem moldura vazia
                 inserirPaginaMemoria1(m, p[i].indice); // insere na memoria
                 insere_pagina_nru(&li, p[i]); // insere na lista nru
                 printf("Adicionou pagina %d na memoria e na lista nru\n", p[i].indice);
             }
-            else
-            {
+            else{
                 /* passa qual pagina ira entrar e informa qual saiu */
                 paginaAsair = substituir_pagina_lista_nru(&li, p[i]);
                 printf("Valor retornado: %d\n", paginaAsair);
@@ -293,8 +287,8 @@ void testeListaNRU()
                 printf("Removeu pagina %d e adicionou pagina %d na memoria e na lista nru\n", paginaAsair, p[i].indice);
             }
         }
-        li.tempo += 1;
-        paginaAsair = 0;
+
+        tempoSO++;
     }
 
     printf("\n\n\nLista nru:\n");

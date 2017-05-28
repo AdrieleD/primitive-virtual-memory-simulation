@@ -17,7 +17,8 @@ typedef struct {
 void CriaListaNRU(ListaNRU *li);
 void libera_lista_nru(ListaNRU *li);
 void insere_pagina_nru(ListaNRU *li, Pagina p);
-void atualizar_ultima_referencia_pagina_nru(ListaNRU *li, int p);
+void atualizar_ultima_referencia_pagina_nru(ListaNRU *li, int p, int tipoReferencia);
+void atualizar_referencia_nru(ListaNRU *li);
 int substituir_pagina_lista_nru(ListaNRU *li, Pagina p);
 void atribuiClasse(ListaNRU *lista);
 void imprime_lista_nru(ListaNRU *li);

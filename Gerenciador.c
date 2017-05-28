@@ -171,8 +171,7 @@ int executarWSClock(char *nomeArq, int tau)
     return faltas;
 }
 
-void executarNRU(char *nomeArq)
-{
+void executarNRU(char *nomeArq){
     char comando;
     int pagina, M, P, faltas = 0;
     FILE *arq = fopen(nomeArq, "r");
@@ -184,41 +183,48 @@ void executarNRU(char *nomeArq)
         return;
     }
 
-    int i = 0, acessos = 0;
+    int i = 0, acessos = 0, tempoSO = 1;
     fscanf(arq, "%d %d\n", &M, &P);
     Memoria m = iniciarMemoria(M);
 
     ListaLRU li;
     CriaListaNRU(&li);
-    while(!feof(arq))
-    {
+    while(!feof(arq)){
 
         fscanf(arq, "%c %d\n", &comando, &pagina);
         // indice   R   W   classe  idade   ultimaVezUsada
         Pagina p = {pagina, 1, 0, 0, 0, li.tempo};
 
-        if(temPagina(m, p.indice))
-        {
-            atualizar_ultima_referencia_pagina_nru(&li, p.idade);
+        if (comando == ESCRITA)
+            p.W = 1;
+        else
+            p.R = 1;
+
+        if(tempoSO%3 == 0) /* Para determinar tempo do SO a cada 3 usos de pagina*/
+            atualizar_referencia_nru(&li); /* Setar todos bits R para 0 a cada tempo do SO*/
+
+        atribuiClasse(&li); // atualizar classes das paginas
+
+
+        if(temPagina(m, p.indice)){ // atualizar bits R e W caso já exista a pagina
+            atualizar_ultima_referencia_pagina_nru(&li, p.indice, comando);
         }
-        else if(!temPagina(m, p.indice))   // pagina não está na memoria, substituir pagina ou não (tem moldura vazia)
-        {
+        else{   // pagina não está na memoria, substituir pagina ou não (tem moldura vazia)
             faltas++;
-            if(temMolduraVazia(m))  // tem moldura vazia
-            {
+            if(temMolduraVazia(m)){  // tem moldura vazia
                 inserirPaginaMemoria1(m, p.indice); // insere na memoria
                 insere_pagina_nru(&li, p); // insere na lista nru
                 //printf("Adicionou pagina %d na memoria e na lista nru\n", p.indice);
             }
-            else
-            {
+            else{
                 /* passa qual pagina ira entrar e informa qual saiu */
                 int paginaAsair = substituir_pagina_lista_nru(&li, p);
+                //printf("Valor retornado: %d\n", paginaAsair);
                 inserirPaginaMemoria2(m, paginaAsair, p.indice); // troca pagina na memoria
-                //printf("Removeu pagina %d e adicionou pagina %d na memoria e na lista nru\n", paginaAsair, p.indice);
+                //printf("Removeu pagina %d e adicionou pagina %d na memoria e na lista nru\n", paginaAsair, p);
             }
         }
-        li.tempo += 1;
+        tempoSO++;
         acessos++;
     }
     fclose(arq);
@@ -237,8 +243,7 @@ void executarNRU(char *nomeArq)
 }
 
 
-void executarLRU(char *nomeArq)
-{
+void executarLRU(char *nomeArq){
     char comando;
     int pagina, M, P, faltas = 0;
     FILE *arq = fopen(nomeArq, "r");

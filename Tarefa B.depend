@@ -1,66 +1,69 @@
 # depslib dependency file v1.0
-1495663757 source:/home/jose/Documents/primitive-virtual-memory-simulation/main.c
+1496007765 source:/home/jose/Documents/primitive-virtual-memory-simulation/main.c
 	<stdio.h>
 	<stdlib.h>
 	"Testes.h"
 	"Gerenciador.h"
 	"GeradorArquivosTeste.h"
 
-1495556517 /home/jose/Documents/primitive-virtual-memory-simulation/Testes.h
+1496003670 /home/jose/Documents/primitive-virtual-memory-simulation/Testes.h
 
-1495511821 source:/home/jose/Documents/primitive-virtual-memory-simulation/Memoria.c
+1495988551 source:/home/jose/Documents/primitive-virtual-memory-simulation/Memoria.c
 	<stdio.h>
 	<stdlib.h>
 	"Memoria.h"
 
-1495511834 /home/jose/Documents/primitive-virtual-memory-simulation/Memoria.h
+1495988551 /home/jose/Documents/primitive-virtual-memory-simulation/Memoria.h
 	"Moldura.h"
 
-1495504957 /home/jose/Documents/primitive-virtual-memory-simulation/Moldura.h
+1495988551 /home/jose/Documents/primitive-virtual-memory-simulation/Moldura.h
 
-1495512494 source:/home/jose/Documents/primitive-virtual-memory-simulation/SegundaChance.c
+1495988551 source:/home/jose/Documents/primitive-virtual-memory-simulation/SegundaChance.c
 	<stdio.h>
 	<stdlib.h>
 	"SegundaChance.h"
 
-1495577441 source:/home/jose/Documents/primitive-virtual-memory-simulation/Testes.c
+1496007438 source:/home/jose/Documents/primitive-virtual-memory-simulation/Testes.c
 	<stdio.h>
 	<stdlib.h>
 	"Memoria.h"
 	"Pagina.h"
 	"SegundaChance.h"
 	"WSClock.h"
+	"LRU.h"
+	"NRU.h"
 
-1494972158 /home/jose/Documents/primitive-virtual-memory-simulation/Pagina.h
+1495988551 /home/jose/Documents/primitive-virtual-memory-simulation/Pagina.h
 
-1495512509 /home/jose/Documents/primitive-virtual-memory-simulation/SegundaChance.h
+1495988551 /home/jose/Documents/primitive-virtual-memory-simulation/SegundaChance.h
 	"Pagina.h"
 
-1495665181 source:/home/jose/Documents/primitive-virtual-memory-simulation/WSClock.c
+1495988551 source:/home/jose/Documents/primitive-virtual-memory-simulation/WSClock.c
 	<stdio.h>
 	<stdlib.h>
 	"WSClock.h"
 
-1495663392 /home/jose/Documents/primitive-virtual-memory-simulation/WSClock.h
+1495988551 /home/jose/Documents/primitive-virtual-memory-simulation/WSClock.h
 	"Pagina.h"
 
-1495663364 /home/jose/Documents/primitive-virtual-memory-simulation/Gerenciador.h
+1496003670 /home/jose/Documents/primitive-virtual-memory-simulation/Gerenciador.h
 
-1495663419 source:/home/jose/Documents/primitive-virtual-memory-simulation/Gerenciador.c
+1496007749 source:/home/jose/Documents/primitive-virtual-memory-simulation/Gerenciador.c
 	<stdio.h>
 	<stdlib.h>
 	"Gerenciador.h"
 	"Memoria.h"
 	"SegundaChance.h"
 	"WSClock.h"
+	"LRU.h"
 
-1495664220 source:/home/jose/Documents/primitive-virtual-memory-simulation/GeradorArquivosTeste.c
+1495988551 source:/home/jose/Documents/primitive-virtual-memory-simulation/GeradorArquivosTeste.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	<string.h>
 
-1495593915 /home/jose/Documents/primitive-virtual-memory-simulation/GeradorArquivosTeste.h
+1495988551 /home/jose/Documents/primitive-virtual-memory-simulation/GeradorArquivosTeste.h
 
 1495804987 source:/home/adriele/Dropbox/CIÊNCIA DA COMPUTAÇÃO -  UFV/7º SEMESTRE/Sistemas Operacionais/primitive-virtual-memory-simulation/GeradorArquivosTeste.c
 	<stdio.h>
@@ -215,5 +218,21 @@
 	"NRU.h"
 
 1495989277 /home/adriele/primitive-virtual-memory-simulation/NRU.h
+	"Pagina.h"
+
+1496003670 /home/jose/Documents/primitive-virtual-memory-simulation/LRU.h
+	"Pagina.h"
+
+1496003670 source:/home/jose/Documents/primitive-virtual-memory-simulation/LRU.c
+	<stdio.h>
+	<stdlib.h>
+	"LRU.h"
+
+1496007778 source:/home/jose/Documents/primitive-virtual-memory-simulation/NRU.c
+	<stdio.h>
+	<stdlib.h>
+	"NRU.h"
+
+1496007791 /home/jose/Documents/primitive-virtual-memory-simulation/NRU.h
 	"Pagina.h"
 
