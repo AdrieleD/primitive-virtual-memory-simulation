@@ -171,6 +171,73 @@ int executarWSClock(char *nomeArq, int tau)
     return faltas;
 }
 
+void executarNRU(char *nomeArq)
+{
+    char comando;
+    int pagina, M, P, faltas = 0;
+    FILE *arq = fopen(nomeArq, "r");
+
+    /* Verifica se arquivo é válido*/
+    if (arq == NULL)
+    {
+        printf("\tErro ao abrir arquivo!\n");
+        return;
+    }
+
+    int i = 0, acessos = 0;
+    fscanf(arq, "%d %d\n", &M, &P);
+    Memoria m = iniciarMemoria(M);
+
+    ListaLRU li;
+    CriaListaNRU(&li);
+    while(!feof(arq))
+    {
+
+        fscanf(arq, "%c %d\n", &comando, &pagina);
+        // indice   R   W   classe  idade   ultimaVezUsada
+        Pagina p = {pagina, 1, 0, 0, 0, li.tempo};
+
+        if(temPagina(m, p.indice))
+        {
+            atualizar_ultima_referencia_pagina_nru(&li, p.idade);
+        }
+        else if(!temPagina(m, p.indice))   // pagina não está na memoria, substituir pagina ou não (tem moldura vazia)
+        {
+            faltas++;
+            if(temMolduraVazia(m))  // tem moldura vazia
+            {
+                inserirPaginaMemoria1(m, p.indice); // insere na memoria
+                insere_pagina_nru_ordenada(&li, p); // insere na lista lru
+                //printf("Adicionou pagina %d na memoria e na lista nru\n", p.indice);
+            }
+            else
+            {
+                atribuiClasse(&li);
+                /* passa qual pagina ira entrar e informa qual saiu */
+                int paginaAsair = substituir_pagina_lista_nru(&li, p);
+                inserirPaginaMemoria2(m, paginaAsair, p.indice); // troca pagina na memoria
+                //printf("Removeu pagina %d e adicionou pagina %d na memoria e na lista nru\n", paginaAsair, p.indice);
+            }
+        }
+        li.tempo += 1;
+        acessos++;
+    }
+    fclose(arq);
+
+    printf("\n\n\nLista nru:\n");
+    imprime_lista_nru(&li);
+//    printf("\n\n\nMemoria:\n");
+//    imprime_memoria(m);
+
+    libera_Memoria(m);
+    printf("\tTamanho da memória: %d\n", m->tamanho);
+    printf("\tNúmero total de acessos: %d\n", acessos);
+    printf("\tNumero total de faltas: %d\n", faltas);
+    //printf("\tTempo percorrido: %d\n", li->tempo);
+    return faltas;
+}
+
+
 void executarLRU(char *nomeArq)
 {
     char comando;

@@ -48,6 +48,10 @@
 		</Unit>
 		<Unit filename="Memoria.h" />
 		<Unit filename="Moldura.h" />
+		<Unit filename="NRU.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="NRU.h" />
 		<Unit filename="Pagina.h" />
 		<Unit filename="SegundaChance.c">
 			<Option compilerVar="CC" />

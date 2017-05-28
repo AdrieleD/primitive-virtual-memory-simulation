@@ -5,7 +5,8 @@
 #include "GeradorArquivosTeste.h"
 
 #define TAM 100
-int main(){
+int main()
+{
     //testeCriarMemoria();
     //testeInsercaoPaginas();
     //testePaginaPresente();
@@ -29,9 +30,11 @@ int main(){
     return 0;
 }
 
-void menu(){
+void menu()
+{
     int tipoEntrada = 0;
-    do{
+    do
+    {
         printf("\n\t* * * * * * *SIMULADOR DE MEMORIA VIRTUAL RUDIMENTAR* * * * * * *\n");
         printf("\t*                                                               *\n");
         printf("\t*\t(1) Segunda Chance                                      *\n");
@@ -46,44 +49,47 @@ void menu(){
         printf("\tQual entrada? ");
         scanf("%d", &tipoEntrada);
         limparBuffer();
-        switch(tipoEntrada){
-            case 1:
-                system("clear || cls");
-                segundaChance();
-                break;
-            case 2:
-                system("clear || cls");
-                wsclock();
-                break;
-            case 3:
-                system("clear || cls");
-
-                break;
-            case 4:
-                system("clear || cls");
-                LRU();
-                break;
-            case 5:
-                system("clear || cls");
-                geradorArquivos();
-                break;
-            case 6:
-                system("clear || cls");
-                buscarMelhorValorTau();
-                break;
-            case 0:
-                printf("\n\tSimulador Finalizado com sucesso.\n");
-                return;
-                break;
-            default:
-                system("clear || cls");
-                printf("\n\tOpção inválida! Digite novamente.\n");
-                break;
+        switch(tipoEntrada)
+        {
+        case 1:
+            system("clear || cls");
+            segundaChance();
+            break;
+        case 2:
+            system("clear || cls");
+            wsclock();
+            break;
+        case 3:
+            system("clear || cls");
+            NRU();
+            break;
+        case 4:
+            system("clear || cls");
+            LRU();
+            break;
+        case 5:
+            system("clear || cls");
+            geradorArquivos();
+            break;
+        case 6:
+            system("clear || cls");
+            buscarMelhorValorTau();
+            break;
+        case 0:
+            printf("\n\tSimulador Finalizado com sucesso.\n");
+            return;
+            break;
+        default:
+            system("clear || cls");
+            printf("\n\tOpção inválida! Digite novamente.\n");
+            break;
         }
-    }while(tipoEntrada != 0);
+    }
+    while(tipoEntrada != 0);
 }
 
-void segundaChance(){
+void segundaChance()
+{
     printf("\n\t* * * * * * *ALGORITMO: SEGUNDA CHANCE* * * * * * *\n");
     char nomeArq[TAM];
     printf("\tNome do arquivo de teste: ");
@@ -96,7 +102,8 @@ void segundaChance(){
     //menu();
 }
 
-void wsclock(){
+void wsclock()
+{
     printf("\n\t* * * * * * *ALGORITMO: WSCLOCK* * * * * * *\n");
     char nomeArq[TAM];
     int tau;
@@ -113,20 +120,36 @@ void wsclock(){
     //menu();
 }
 
-void LRU(){
-    printf("\n\t* * * * * * *ALGORITMO: LRU* * * * * * *\n");
+void NRU()
+{
+    printf("\n\t* * * * * * *ALGORITMO: NRU* * * * * * *\n");
     char nomeArq[TAM];
     printf("\tNome do arquivo de teste: ");
     gets(&nomeArq);
-    executarLRU(nomeArq);
-    //testeExecuxaoLRU();
+    executarNRU(nomeArq);
+    //testeListaNRU();
     printf("\tPressione ENTER para continuar...");
     getchar();
     system("clear || cls");
     //menu();
 }
 
-void geradorArquivos(){
+void LRU()
+{
+    printf("\n\t* * * * * * *ALGORITMO: LRU* * * * * * *\n");
+    char nomeArq[TAM];
+    printf("\tNome do arquivo de teste: ");
+    gets(&nomeArq);
+    executarLRU(nomeArq);
+    //testeListaLRU();
+    printf("\tPressione ENTER para continuar...");
+    getchar();
+    system("clear || cls");
+    //menu();
+}
+
+void geradorArquivos()
+{
     int numAcessos, tamMemoria, numPaginas;
     char nome[TAM];
 
@@ -139,7 +162,8 @@ void geradorArquivos(){
     scanf("%d", &numPaginas);
     printf("\tNúmero total de acessos: ");
     scanf("%d", &numAcessos);
-    if(!gerarArquivoTeste(nome, numAcessos, tamMemoria, numPaginas)){
+    if(!gerarArquivoTeste(nome, numAcessos, tamMemoria, numPaginas))
+    {
         printf("\tArquivo criado com sucesso!\n\tPressione ENTER para continuar...");
         limparBuffer();
         getchar();
@@ -148,7 +172,8 @@ void geradorArquivos(){
     //menu();
 }
 
-void buscarMelhorValorTau(){
+void buscarMelhorValorTau()
+{
     printf("\n\t* * * * * * *DETERMINAR MELHOR VALOR DE TAU* * * * * * *\n");
     char nomeArq[TAM];
     int valor;
@@ -161,7 +186,8 @@ void buscarMelhorValorTau(){
     system("clear || cls");
 }
 
-void limparBuffer(){
+void limparBuffer()
+{
     char c;
     while((c = getchar()) != '\n' && c != EOF);
 }

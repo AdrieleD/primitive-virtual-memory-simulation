@@ -5,6 +5,7 @@
 #include "SegundaChance.h"
 #include "WSClock.h"
 #include "LRU.h"
+#include "NRU.h"
 
 void testeCriarMemoria()
 {
@@ -252,4 +253,22 @@ void testeListaLRU()
     }
     printf("tamanho lista: %d.\n", lista.tamanho);
     imprime_lista_lru(&lista);
+}
+
+void testeListaNRU()
+{
+    ListaNRU lista;
+    CriaListaNRU(&lista);
+    Pagina p[] = {{35, 0, 0, 0, 0, 1},
+        { 7, 1, 1, 0, 0, 1},
+        {25, 1, 1, 0, 0, 1},
+        {17, 1, 1, 0, 0, 1}
+    };
+    int i;
+    for(i = 0; i < 4; i++)
+    {
+        insere_pagina_nru_ordenada(&lista, p[i]);
+    }
+    printf("tamanho lista: %d.\n", lista.tamanho);
+    imprime_lista_nru(&lista);
 }
