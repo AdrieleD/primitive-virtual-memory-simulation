@@ -301,10 +301,9 @@ void executarLRU(char *nomeArq)
         acessos++;
     }
     fclose(arq);
-    printf("tamanho %d", li.tamanho);
 
 //    printf("\n\n\nLista lru:\n");
-    imprime_lista_lru(&li);
+//    imprime_lista_lru(&li);
 //    printf("\n\n\nMemoria:\n");
 //    imprime_memoria(m);
 
