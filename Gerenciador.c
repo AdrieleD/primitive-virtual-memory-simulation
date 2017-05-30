@@ -171,7 +171,8 @@ int executarWSClock(char *nomeArq, int tau)
     return faltas;
 }
 
-void executarNRU(char *nomeArq){
+void executarNRU(char *nomeArq)
+{
     char comando;
     int pagina, M, P, faltas = 0;
     FILE *arq = fopen(nomeArq, "r");
@@ -189,7 +190,8 @@ void executarNRU(char *nomeArq){
 
     ListaLRU li;
     CriaListaNRU(&li);
-    while(!feof(arq)){
+    while(!feof(arq))
+    {
 
         fscanf(arq, "%c %d\n", &comando, &pagina);
         // indice   R   W   classe  idade   ultimaVezUsada
@@ -206,17 +208,21 @@ void executarNRU(char *nomeArq){
         atribuiClasse(&li); // atualizar classes das paginas
 
 
-        if(temPagina(m, p.indice)){ // atualizar bits R e W caso já exista a pagina
+        if(temPagina(m, p.indice))  // atualizar bits R e W caso já exista a pagina
+        {
             atualizar_ultima_referencia_pagina_nru(&li, p.indice, comando);
         }
-        else{   // pagina não está na memoria, substituir pagina ou não (tem moldura vazia)
+        else    // pagina não está na memoria, substituir pagina ou não (tem moldura vazia)
+        {
             faltas++;
-            if(temMolduraVazia(m)){  // tem moldura vazia
+            if(temMolduraVazia(m))   // tem moldura vazia
+            {
                 inserirPaginaMemoria1(m, p.indice); // insere na memoria
                 insere_pagina_nru(&li, p); // insere na lista nru
                 //printf("Adicionou pagina %d na memoria e na lista nru\n", p.indice);
             }
-            else{
+            else
+            {
                 /* passa qual pagina ira entrar e informa qual saiu */
                 int paginaAsair = substituir_pagina_lista_nru(&li, p);
                 //printf("Valor retornado: %d\n", paginaAsair);
@@ -243,7 +249,8 @@ void executarNRU(char *nomeArq){
 }
 
 
-void executarLRU(char *nomeArq){
+void executarLRU(char *nomeArq)
+{
     char comando;
     int pagina, M, P, faltas = 0;
     FILE *arq = fopen(nomeArq, "r");
@@ -270,7 +277,8 @@ void executarLRU(char *nomeArq){
 
         if(temPagina(m, p.indice))
         {
-            atualizar_ultima_referencia_pagina_lru(&li, p.idade);
+            Remove(&li, p.indice);
+            insere_pagina_lru(&li, p); // insere na lista lru
         }
         else if(!temPagina(m, p.indice))   // pagina não está na memoria, substituir pagina ou não (tem moldura vazia)
         {
@@ -278,7 +286,7 @@ void executarLRU(char *nomeArq){
             if(temMolduraVazia(m))  // tem moldura vazia
             {
                 inserirPaginaMemoria1(m, p.indice); // insere na memoria
-                insere_pagina_lru_ordenada(&li, p); // insere na lista lru
+                insere_pagina_lru(&li, p); // insere na lista lru
                 //printf("Adicionou pagina %d na memoria e na lista lru\n", p.indice);
             }
             else
@@ -293,9 +301,10 @@ void executarLRU(char *nomeArq){
         acessos++;
     }
     fclose(arq);
+    printf("tamanho %d", li.tamanho);
 
 //    printf("\n\n\nLista lru:\n");
-//    imprime_lista_lru(&li);
+    imprime_lista_lru(&li);
 //    printf("\n\n\nMemoria:\n");
 //    imprime_memoria(m);
 

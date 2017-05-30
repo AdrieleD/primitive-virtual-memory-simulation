@@ -249,7 +249,7 @@ void testeListaLRU()
     int i;
     for(i = 0; i < 4; i++)
     {
-        insere_pagina_lru_ordenada(&lista, p[i]);
+        insere_pagina_lru(&lista, p[i]);
     }
     printf("tamanho lista: %d.\n", lista.tamanho);
     imprime_lista_lru(&lista);

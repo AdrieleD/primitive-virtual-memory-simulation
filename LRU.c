@@ -27,111 +27,86 @@ void libera_lista_lru(ListaLRU *li)
     }
 }
 
-void insere_pagina_lru_ordenada(ListaLRU *li, Pagina p)
+void insere_pagina_lru(ListaLRU *lista, Pagina p)
 {
-    if(li->primeiro == NULL)
-        return 0;
-    elementoLRU *no = (elementoLRU*) malloc(sizeof(elementoLRU));
-    if(no == NULL)
-        return 0;
-    no->pagina = p;
-    if(no == NULL) //lista vazia: insere início
-    {
-        no->prox = NULL;
-        li->primeiro = no;
-        return 1;
-    }
-    else
-    {
-        elementoLRU *ant, *atual = NULL;
-        atual = li->primeiro;
-        while(atual != NULL && atual->pagina.ultimaVezUsada < p.ultimaVezUsada)
-        {
-            ant = atual;
-            atual = atual->prox;
-        }
-        if(atual == li->primeiro) //insere início
-        {
-            no->prox = li->primeiro;
-            li->primeiro = no;
-        }
-        else
-        {
-            no->prox = atual;
-            ant->prox = no;
-        }
-
-        li->tamanho++;
-    }
+    lista->ultimo->prox = (elementoLRU*)malloc(sizeof(elementoLRU));
+    lista->ultimo = lista->ultimo->prox;
+    lista->ultimo->pagina = p;
+    lista->ultimo->prox = NULL;
+    lista->tamanho++;
 }
 
-void atualizar_ultima_referencia_pagina_lru(ListaLRU *li, int p)
+void Remove(ListaLRU *lista, int p)
 {
-    if(li == NULL)
-        return;
-    elementoLRU* aux = li->primeiro;
-    while(aux != NULL)
-    {
-        if(p == aux->pagina.indice)
-        {
-            aux->pagina.ultimaVezUsada = li->tempo; // atualiza ultima referencia a pagina
-            MoveMenor(li); //move celula com menor tempo para a primeira posição
-
+    elementoLRU *auxiliar;
+    auxiliar = lista->primeiro;
+    while(auxiliar!=NULL)
+   {
+        if(auxiliar->pagina.indice == p)
             break;
-        }
-        aux = aux->prox;
-    }
-}
+        auxiliar=auxiliar->prox;
+   }
+   if (auxiliar==NULL)
+   {
+       //printf("Compromisso inexistente!\n");
+   }
+   else
+   {
+       if(auxiliar->prox==lista->primeiro->prox)
+       {
+            elementoLRU *aux1;
+            aux1=lista->primeiro;
 
-void MoveMenor(ListaLRU *li)
-{
-    elementoLRU *menor;
-
-    if(li->primeiro == NULL)
-    {
-        //printf("Lista Vazia!");
-        return 0;
-    }
-    else
-    {
-        if(li->tamanho == 1)
-        {
-            //printf("Lista com apenas um elemento!");
-            return 0;
-        }
-        else
-        {
-            elementoLRU *aux;
-            elementoLRU *anterior;
-
-            aux = li->primeiro->prox;
-
-            menor = aux;
-            while (aux != NULL)
+            if(aux1==NULL)
+                CriaListaLRU(lista);
+            else
             {
-
-                if(aux->pagina.ultimaVezUsada < menor->pagina.ultimaVezUsada )
-                {
-                    menor = aux;
-                }
-                aux = aux->prox;
+                aux1 = auxiliar->prox;
             }
+            free(auxiliar);
+       }
+       else
+       {
+           if(auxiliar==lista->ultimo->prox)
+           {
+               elementoLRU *aux1 = NULL;
+               aux1=lista->primeiro->prox;
 
-            if (menor != li->primeiro)
-            {
-                anterior = li->primeiro;
-                while (anterior->prox != menor)
-                    anterior = anterior->prox;
+               elementoLRU *anterior = NULL;
+               while(aux1!=NULL)
+               {
+                    if(aux1 == lista->ultimo->prox)
+                    {
+                        anterior=aux1;
+                        break;
+                    }
+                    aux1=aux1->prox;
+               }
+                lista->ultimo->prox = anterior;
+                anterior->prox = NULL;
+                free(auxiliar);
+           }
+           else
+           {
+               elementoLRU *aux1 = NULL;
+               aux1=lista->primeiro;
 
-                if (menor->prox == NULL)
-                    li->ultimo = anterior;
+               elementoLRU *anterior = NULL;
 
-                anterior->prox = menor->prox;
-                menor->prox = li->primeiro->prox;
-                li->primeiro->prox = menor;
-            }
-        }
-    }
+               while(aux1!=NULL)
+               {
+                    if(aux1->prox == auxiliar)
+                    {
+                        anterior=aux1;
+                        break;
+                    }
+                    aux1=aux1->prox;
+               }
+               anterior->prox = auxiliar->prox;
+               free(auxiliar);
+           }
+       }
+   }
 }
 
 int substituir_pagina_lista_lru(ListaLRU *li, Pagina p)
@@ -142,7 +117,7 @@ int substituir_pagina_lista_lru(ListaLRU *li, Pagina p)
         return -1;
 
     int pagina;
-    elementoLRU *no = li->primeiro;
+    elementoLRU *no = li->primeiro->prox;
 
     pagina = no->pagina.indice; // pagina a sair
     no->pagina = p; // substituir pagina

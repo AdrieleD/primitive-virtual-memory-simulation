@@ -16,9 +16,8 @@ typedef struct {
 
 void CriaListaLRU(ListaLRU *li);
 void libera_lista_lru(ListaLRU *li);
-void insere_pagina_lru_ordenada(ListaLRU *li, Pagina p);
-void atualizar_ultima_referencia_pagina_lru(ListaLRU *li, int p);
-void MoveMenor(ListaLRU *li);
+void insere_pagina_lru(ListaLRU *li, Pagina p);
+void Remove(ListaLRU *li, int p);
 int substituir_pagina_lista_lru(ListaLRU *li, Pagina p);
 void imprime_lista_lru(ListaLRU *li);
 
